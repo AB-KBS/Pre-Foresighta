@@ -3,7 +3,7 @@
 //
 
 // Reboot
-$app-bg-color: #fcfcfc;
+$app-bg-color: #fafbfb;
 $app-bg-color-dark: $coal-400;
 $app-blank-bg-color: $app-bg-color;
 $app-blank-bg-color-dark: $app-bg-color-dark;
@@ -18,7 +18,7 @@ $app-container-padding-x: 30px;
 $app-container-padding-x-mobile: 20px;
 
 // Header base
-$app-header-base-height: 74px;
+$app-header-base-height: 65px;
 $app-header-base-height-mobile: 60px;
 $app-header-base-bg-color: transparent;
 $app-header-base-bg-color-dark: $coal-500;
@@ -130,3 +130,4 @@ $app-layout-builder-toggle-end: 50px;
 $app-layout-builder-toggle-end-mobile: 40px;
 $app-layout-builder-toggle-bottom: 40px;
 $app-layout-builder-toggle-bottom-mobile: 20px; 
+
