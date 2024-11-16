@@ -23,11 +23,6 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'login',
-        component: LoginComponent,
-        data: { returnUrl: window.location.pathname },
-      },
-      {
         path:'verify-email',
         component:VerifyEmailComponent,
       },
@@ -51,11 +46,6 @@ const routes: Routes = [
       {
         path: 'wait',
         component: WaitComponent,
-      },
-     
-      {
-        path: 'sign-up',
-        component: SignUpComponent,
       },
       {
         path: 'logout',

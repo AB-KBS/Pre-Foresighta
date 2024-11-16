@@ -12,16 +12,7 @@ export const routes: Routes = [
   loadChildren: () =>
     import('./modules/auth/auth.module').then((m) => m.AuthModule),
 },
-{
-  path: 'app',
-  loadChildren: () =>
-    import('./_metronic/layout/layout.module').then((m) => m.LayoutModule),
-},
-{
-  path: 'admin-dashboard',
-  loadChildren: () =>
-    import('./modules/admin-dashboard/admin-dashboard.module').then((m) => m.AdminDashboardModule),
-},
+
 {
   path: 'error',
   loadChildren: () =>
