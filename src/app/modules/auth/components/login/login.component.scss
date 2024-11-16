@@ -1,0 +1,89 @@
+:host {
+  width: 100%;
+  @media (min-width: 992px) {
+    .login-form {
+      width: 100%;
+      max-width: 450px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+   
+  }
+}
+
+
+
+.country-item {
+  display: flex;
+  align-items: center;
+  
+  .country-flag {
+    width: 20px;
+    margin-right: 8px;
+  }
+}
+.w-90{
+  width: 75%;
+  @media screen and (max-width:767px) {
+    width: 100%;
+  }
+}
+
+.form-control{
+  background-color: #ffffffa7 !important;
+}
+
+.bg-light{
+  background-image: url('../../../../../assets/media/images/2600x1200/bg-abstract-login.png');
+  background-size: cover;
+}
+.h-100vh{
+  min-height: 100vh;
+}
+.first-block{
+  width: 40%;
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width:700px) {
+    width: 100%;
+    padding:20px;
+  }
+}
+.second-block{
+  width: 40%;
+  @media screen and (max-width:700px) {
+    width: 100%;
+    padding: 40px;
+  }
+}
+.pt-100{
+  padding-top: 180px;
+}
+.gap{
+  gap: 30px;
+}
+.top-rtl{
+  top: 29px;
+   z-index: 1; 
+   background: none; 
+   border: none;
+}
+.top-ltr{
+  top: 27px;
+   z-index: 1; 
+   background: none; 
+   border: none;
+}
+
+.pt-res-100{
+  padding-top: 180px;
+}
+
+@media screen and (max-width: 992px) {
+  .pt-res-100{
+    padding-top: 50px;
+  }
+}

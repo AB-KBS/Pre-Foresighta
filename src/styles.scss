@@ -1,0 +1,202 @@
+
+
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/sass/style.scss";
+// Replace above style with this css file to enable RTL styles
+// @import "./assets/css/style.rtl";
+@import './assets/sass/plugins.scss';
+// @import "./assets/css/style.rtl.css";
+@import "./assets/sass/style.angular.scss";
+
+// Keenicons - High quality and pixel perfect font icons available in 3 styles, duotone, outline and solid for Metronic elements
+@import "./assets/plugins/keenicons/duotone/style.css";
+@import "./assets/plugins/keenicons/outline/style.css";
+@import "./assets/plugins/keenicons/solid/style.css";
+
+
+
+
+
+
+
+.text-hover-blue:hover{
+color: #017BFE !important;
+}
+
+
+.country-item {
+    display: flex;
+    align-items: center;
+}
+
+.country-flag {
+    width: 20px;
+    height: 15px;
+    margin: 0px 10px;
+}
+
+
+.search-bar-tools .p-dropdown-trigger{
+    justify-content: start !important; 
+}
+
+.is-invalid{
+    background-image: none !important;
+}
+
+.ltr{
+    direction: ltr !important;
+}
+
+.my-custom-button-success {
+    background-color: #03a81f !important; /* Set your desired color */
+  }
+  
+  .my-custom-button-success:hover {
+    background-color: #04c925 !important; /* Change the hover color */
+  }
+  .swal2-popup .swal2-title{
+    font-weight: 600 !important;
+  }
+  .my-custom-button-error {
+    background-color: #ce1800 !important; /* Set your desired color */
+  }
+  
+  .my-custom-button-error:hover {
+    background-color: #c90404 !important; /* Change the hover color */
+  }
+
+  .swal2-styled.swal2-confirm:focus{
+    box-shadow:  none !important;
+  }
+  .my-custom-icon-size .swal2-icon {
+    font-size: 1rem !important; /* Adjust the size as needed */
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+   .mt-100{
+    margin-top: 100px;
+    @media screen and (max-width:768px) {
+      margin-top: 70px;
+    }
+    @media screen and (max-width:464px) {
+      margin-top: 30px;
+    }
+   }
+  .mil-up {
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Optional, based on the animation */
+  }
+
+.footer {
+    padding: 20px;
+    margin: 0 !important;
+    background-color: #f8f8f8; /* Adjust if needed */
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    border-top: 1px solid #e0e0e0; /* Optional border for separation */
+    @media screen and (max-width:1000px) {
+        position: static;
+        margin-top: 100px;
+      
+     }
+}
+
+.footer-content {
+    font-size: 14px;
+    color: #6c757d; /* Adjust color as needed */
+}
+
+.footer-link {
+    margin-left: 15px;
+    color: #6c757d; /* Adjust link color */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: #007bff; /* Hover color for links */
+    text-decoration: underline;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9 !important;
+  }
+  
+  .table-striped tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  
+.scrollable-dialog .p-dialog-content {
+    overflow-y: auto !important;
+  }
+
+  #toast-container > div {
+    opacity:1;
+}
+
+.text-underline{
+  text-decoration: underline !important;
+}
+
+.toast {
+    opacity: 1 !important;
+}
+
+html[dir="rtl"] .logo{
+    right: 20px;
+  }
+  html[dir="ltr"] .logo{
+    left: 20px;
+  }
+
+ 
+  .form-control-lg{
+    padding: 1.2rem 1.5rem;
+  }
+  .h-fit{
+    height: fit-content;
+  }
+  .text-blue{
+    color: #0CA5E9 !important; 
+}
+.btn-light{
+  border: 1px solid #dbdfe9 !important;
+} 
+.btn-xs{
+font-size: 10px;
+padding: 0.4rem 0.6rem !important;
+width: fit-content;
+
+}
+.radio{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.radio-active{
+  background-color: #FFF;
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+  height: 100%;
+  border-radius: 9px;
+}
+.card-hover-shadow{
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.card-hover-shadow:hover{
+  border: 1px solid #0337612c;
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.09);
+}
+.h-100vh{
+  height: 100vh;
+}
+
+.swal2-styled.swal2-confirm{
+  background-color: #033761 !important;
+}

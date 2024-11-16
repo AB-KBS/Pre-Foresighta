@@ -1,0 +1,246 @@
+<!-- consulting-fields.component.html -->
+
+<p-progressBar
+  *ngIf="isLoading$ | async"
+  mode="indeterminate"
+  [style]="{ height: '4px' }"
+></p-progressBar>
+
+
+  <div id="kt_app_toolbar" class="app-toolbar pt-10 mb-0">
+    <div
+      id="kt_app_toolbar_container"
+      class="app-container container-fluid d-flex align-items-stretch"
+    >
+      <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+        <div
+          class="page-title d-flex flex-column justify-content-center gap-1 me-3"
+        >
+          <h1
+            class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0"
+          >
+            Consulting Fields
+          </h1>
+          <div class="fw-semibold fs-7 my-0 text-muted">
+            {{ listOfConsultingFields.length }} Consulting Field(s)
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2 gap-lg-3">
+          <a (click)="showDialog()" class="btn btn-md btn-flex btn-primary">
+            <i class="ki-outline ki-plus text-white fs-4"></i>
+            Create
+          </a>
+          <p-dialog
+            [header]="isEditMode ? 'Edit Consulting Field' : 'Add Consulting Field'"
+            [modal]="true"
+            [(visible)]="visible"
+            [style]="{ width: '40rem' }"
+          >
+            <p-messages
+              *ngIf="hasErrorMessage"
+              [(value)]="messages"
+              [enableService]="false"
+            ></p-messages>
+            <span class="text-muted mb-3 d-block">
+              {{
+                isEditMode
+                  ? 'Edit Consulting Field Details'
+                  : 'Add Consulting Field Details'
+              }}.
+            </span>
+
+            <form [formGroup]="consultingFieldForm">
+              <div class="mb-3 row">
+                <label for="nameEn" class="col-sm-3 col-form-label"
+                  >Name (English)</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    pInputText
+                    id="nameEn"
+                    class="form-control"
+                    formControlName="nameEn"
+                    autocomplete="off"
+                  />
+                  <div
+                    *ngIf="
+                      nameEn?.invalid && (nameEn?.dirty || nameEn?.touched)
+                    "
+                  >
+                    <div
+                      *ngIf="nameEn?.errors?.required"
+                      class="text-danger"
+                    >
+                      English Name is required.
+                    </div>
+                    <div
+                      *ngIf="nameEn?.errors?.serverError"
+                      class="text-danger"
+                    >
+                      {{ nameEn?.errors?.serverError }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="nameAr" class="col-sm-3 col-form-label"
+                  >Name (Arabic)</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    pInputText
+                    id="nameAr"
+                    class="form-control"
+                    formControlName="nameAr"
+                    autocomplete="off"
+                  />
+                  <div
+                    *ngIf="
+                      nameAr?.invalid && (nameAr?.dirty || nameAr?.touched)
+                    "
+                  >
+                    <div
+                      *ngIf="nameAr?.errors?.required"
+                      class="text-danger"
+                    >
+                      Arabic Name is required.
+                    </div>
+                    <div
+                      *ngIf="nameAr?.errors?.serverError"
+                      class="text-danger"
+                    >
+                      {{ nameAr?.errors?.serverError }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="d-flex justify-content-end gap-2">
+              <button
+                type="submit"
+                [disabled]="consultingFieldForm.invalid || (isLoading$ | async)"
+                (click)="submit()"
+                class="btn btn-primary btn-sm"
+              >
+                <ng-container *ngIf="(isLoading$ | async) === false">
+                  <span class="indicator-label">Save</span>
+                </ng-container>
+                <ng-container *ngIf="isLoading$ | async">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Please wait
+                    <span
+                      class="spinner-border spinner-border-sm align-middle ms-2"
+                    ></span>
+                  </span>
+                </ng-container>
+              </button>
+              <button
+                (click)="onCancel()"
+                class="btn btn-outline-secondary btn-sm"
+              >
+                Cancel
+              </button>
+            </div>
+          </p-dialog>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="(isLoading$ | async) === false && listOfConsultingFields.length >0">
+  <div id="kt_app_content" class="app-content flex-column-fluid">
+    <div
+      id="kt_app_content_container"
+      class="app-container container-fluid"
+    >
+      <div class="card">
+        <div class="card-header border-0 pt-6">
+          <div class="card-title">
+            <div
+              class="d-flex align-items-center position-relative my-1"
+            >
+              <i class="pi pi-search fs-3 position-absolute ms-5"></i>
+              <input
+                type="text"
+                pInputText
+                class="form-control  w-250px ps-12"
+                placeholder="Search Consulting Fields"
+                (input)="applyFilter($event)"
+              />
+            </div>
+          </div>
+
+          <div class="card-toolbar">
+            <!-- Toolbar content can be added here if needed -->
+          </div>
+        </div>
+
+        <div class="card-body pt-0">
+          <p-messages
+            *ngIf="hasSuccessMessage"
+            [(value)]="messages"
+            [enableService]="false"
+          ></p-messages>
+          <p-table
+            #dt
+            [value]="listOfConsultingFields"
+            [paginator]="true"
+            [rows]="10"
+            [globalFilterFields]="['name', 'names.en', 'names.ar']"
+            class="table-p"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Name</th>
+                <th>Name (English)</th>
+                <th>Name (Arabic)</th>
+                <th>Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-consultingField>
+              <tr>
+                <td>{{ consultingField.name }}</td>
+                <td>{{ consultingField.names.en }}</td>
+                <td>{{ consultingField.names.ar }}</td>
+                <td>
+                  <a
+                    pTooltip="Edit Consulting Field"
+                    tooltipPosition="top"
+                    class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
+                    (click)="editConsultingField(consultingField)"
+                  >
+                    <i class="ki-duotone ki-pencil fs-2">
+                      <span class="path1"></span
+                      ><span class="path2"></span>
+                    </i>
+                  </a>
+                  <a
+                    pTooltip="Delete Consulting Field"
+                    tooltipPosition="top"
+                    class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                    (click)="deleteConsultingField(consultingField.id)"
+                  >
+                    <i class="ki-duotone ki-trash fs-2">
+                      <span class="path1"></span
+                      ><span class="path2"></span>
+                      <span class="path3"></span
+                      ><span class="path4"></span>
+                      <span class="path5"></span>
+                    </i>
+                  </a>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="(isLoading$ | async) === false && listOfConsultingFields.length ===0">
+<div class="d-flex align-items-center justify-content-center h-400px text-muted">
+  No Available Data
+</div>
+</ng-container>

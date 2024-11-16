@@ -1,0 +1,24 @@
+.head{
+    height: 60px;
+    background-color: #033761;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+.head-wrap{
+    width: 95%;
+    margin: auto;
+}
+
+.menu-link.active {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #007bff; /* Example color */
+    border-radius: 5px;
+  }
+.sidebarslide{
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+   justify-content: space-between;
+}
