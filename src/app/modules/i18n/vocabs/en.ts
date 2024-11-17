@@ -146,13 +146,12 @@ export const locale = {
         `,
         "EMPOWER_INSIGHTS_TITLE": "Unlock Your Expertise with Foresighta.",
         "EMPOWER_INSIGHTS_TEXT": `
-        Start generating revenue from your insights every time your report is downloaded.<br /><br />
-          <span class="text-dark font-weight-bolder" ><strong>Reach a Global Audience</strong></span> by uploading and sharing your research, reports and data that will have a meaningful impact on individuals, businesses decision-makers around the world.<br /><br />
-          Foresighta provides a unique and Redefining consulting opportunity. Experience Flexible  <span class="text-dark font-weight-bolder" >Engagement with visitors</span>  who can reach out to you for one-on-one consultations and expert opinions, allowing you to offer tailored guidance.
+        Upload your reports and research works and start generating revenue from your insights every time visitors download your work. <br /><br />
+          <span class="text-dark font-weight-bolder" ><strong>Reach a Global Audience.</strong></span><br><br> Your insights will have a meaningful impact on millions of individuals, businesses, and decision-makers worldwide.<br /><br />
+          <span class="text-dark font-weight-bolder" ><strong>Foresighta redefines the consulting journey.</strong></span><br><br>
+          Engage flexibly with visitors who can reach out for expert opinions, tailored guidance, and one-on-one consultations. Now, you can Build your ideal project team from a pool of expert consultants to help you execute projects seamlessly and achieve your project objectives.
           <br><br><span class="text-dark font-weight-bolder" ><strong>Work at your convenience, work any time.</strong></span> <br><br>
-          Bring your reports and studies out of the drawer and let your experience shine.
-Your wealth of knowledge is valued and many are eager to learn from it.
-<br><br>Build your ideal team from a pool of expert consultants and execute a tailored project plan to achieve your objectives.
+          Bring your reports and studies out of the drawer and let your experience shine. Your wealth of knowledge is valued and many are eager to learn from it.
         `,
         "OPTIONAL": "Optional",
         "PREREGISTERATION": "Pre-register now",

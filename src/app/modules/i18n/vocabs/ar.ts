@@ -139,7 +139,7 @@ export const locale = {
         EMPOWER_INSIGHTS_TEXT: `
         ابدأ رحلة جني الإيرادات في كل مرة يتم فيها تنزيل محتواك من قبل الزوار.<br /><br />
             <span class="text-dark font-weight-bolder" ><strong>جمهورك العالم.</strong></span> <br><br>من خلال مشاركتك رؤاك وخبراتك للأفراد والشركات في العالم أجمع، ستحدث أبحاثك وتقاريرك تغيراً ملموساً في صناعة القرار.<br /><br />
-            <span class="text-dark font-weight-bolder" ><strong>ابدأ رحلة العمل الاستشاري الفريدة من نوعها.</strong></span><br><br>
+            <span class="text-dark font-weight-bolder" ><strong>هنا تبدأ رحلة العمل الاستشاري الفريدة من نوعها.</strong></span><br><br>
 
             تتيح المنصة للزائر ميزة التواصل معك للحصول على الاستشارات الفردية والإرشادات المتخصصة.
             <br><br><span class="text-dark font-weight-bolder" ><strong>أينما تكون وفي الوقت الذي تريد.</strong></span><br><br>
