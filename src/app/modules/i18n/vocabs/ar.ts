@@ -64,7 +64,7 @@ export const locale = {
       },
       REGISTRATION: {
         TITLE: "التسجيل",
-        ISIC_CODES_REQUIRED:"كود ISIC مطلوب",
+        ISIC_CODES_REQUIRED:"الصناعة مطلوبة",
         SUBTITLE: "ادخل معلوماتك لإنشاء حسابك",
         GOOGLE_SIGNUP: "عن طريق قوقل",
         LINKEDIN_SIGNUP: "عن طريق لكندان",
