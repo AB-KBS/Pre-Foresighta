@@ -185,7 +185,7 @@ export const locale = {
     },
     COMMON: {
       SLOGAN: "أفقًا جديدًا لعالم الرؤى",
-      "SELECISCIC":"اختر رمز الISIC"
+      "SELECISCIC":"اختر الصناعة"
     },
   },
 };

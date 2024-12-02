@@ -218,7 +218,7 @@ export const locale = {
     },
     COMMON:{
       "SLOGAN":"Redefining the insights landscape",
-      "SELECISCIC":"Select ISIC Codes"
+      "SELECISCIC":"Select Industry"
     }
   }
 };
