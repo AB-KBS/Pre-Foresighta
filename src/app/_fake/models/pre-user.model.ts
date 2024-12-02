@@ -5,7 +5,7 @@ export interface UserPreRegistration {
     password: string;
     confirm_password: string;
     country_id: number;
-    isic_codes: number[];
+    industry_ids: number[];
     consulting_feild_ids: number[];
     hs_code?: string;
     description?: string;

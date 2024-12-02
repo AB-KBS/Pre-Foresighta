@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, catchError, finalize, map, throwError } fr
   providedIn: 'root'
 })
 export class IsicService {
-  private myInsighta = 'https://myinsighta.com/api/isic-code';
+  private myInsighta = 'https://api.foresighta.co/api/common/setting/industry/tree';
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   public isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
 

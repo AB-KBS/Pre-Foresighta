@@ -31,13 +31,89 @@
 }
 
 .bg-light{
-  background-image: url('https://res.cloudinary.com/dsiku9ipv/image/upload/v1728537941/1_ohccnm.webp');
+  background-image: url('https://i.ibb.co/YfRPZYP/1-ohccnm-4.webp');
 }
 .h-100vh{
   min-height: 100vh;
 }
+.p-re{
+  position: relative;
+  z-index: 2;
+}
+.bg-light{
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: auto;
+  animation: gradient 30s ease-in-out infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  box-shadow: 1px 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 0%;
+  }
+  50% {
+      background-position: 100% 100%;
+  }
+  100% {
+      background-position: 0% 0%;
+  }
+}
+
+.wave {
+  background: rgb(235 235 235);
+  position: fixed;
+  width: 200%;
+  height: 12em;
+  animation: wave 15s -3s linear infinite;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.8;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  /* Remove border-radius */
+  /* border-radius: 1000% 1000% 0 0; */
+  /* Add clip-path to create sharp polygon shapes */
+  clip-path: polygon(0% 100%, 25% 50%, 50% 100%, 75% 50%, 100% 100%);
+}
 
 
+.wave:nth-of-type(2) {
+  bottom: -1.25em;
+  animation: wave 23s linear reverse infinite;
+  opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+  bottom: -2.5em;
+  animation: wave 25s -1s reverse infinite;
+  opacity: 0.9;
+}
+
+@keyframes wave {
+  2% {
+      transform: translateX(1);
+  }
+
+  25% {
+      transform: translateX(-25%);
+  }
+
+  50% {
+      transform: translateX(-50%);
+  }
+
+  75% {
+      transform: translateX(-25%);
+  }
+
+  100% {
+      transform: translateX(1);
+  }
+}
 
 .top-rtl{
   top: 29px;

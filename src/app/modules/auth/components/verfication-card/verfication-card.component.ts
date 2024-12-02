@@ -51,18 +51,23 @@ export class VerficationCardComponent implements OnInit, OnDestroy {
 
   submitCode() {
     this.hasError = false;
+    this.isLoading$ = of(true);
     const verifySub = this._checkCode
       .checkEmailcode(this.email, this.code)
       .subscribe({
         next: (res) => {
           if (res.state == false) {
             this.hasError = true;
+            this.isLoading$ = of(false);
             this.cdr.detectChanges();
+
           } else {
+            this.isLoading$ = of(false);
             this.router.navigate(['/auth/wait']);
           }
         },
         error: (err) => {
+          this.isLoading$ = of(false);
           this.hasError = true;
           this.cdr.detectChanges();
         },
