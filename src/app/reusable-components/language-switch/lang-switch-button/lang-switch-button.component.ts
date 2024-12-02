@@ -11,7 +11,7 @@ import { TranslationService } from 'src/app/modules/i18n/translation.service';
 export class LangSwitchButtonComponent implements OnInit {
   selectedLang = 'en'; // Default language
   isMenuVisible = false;
-  selectedFlag = '../../../../assets/media/flags/united-states.svg'; // Default flag
+  selectedFlag = '../../../../assets/media/flags/united-kingdom.svg'; // Default flag
   
   constructor(
     private translationService: TranslationService,

@@ -16,6 +16,7 @@ import { PreRegsiterService } from 'src/app/_fake/services/pre-register/pre-regs
 import { ScrollAnimsService } from 'src/app/_fake/services/scroll-anims/scroll-anims.service';
 import { Message, TreeNode } from 'primeng/api';
 import { IsicService } from 'src/app/_fake/services/isic/isic.service';
+import { IsicCodesService } from 'src/app/_fake/services/industry/industry.service';
 
 @Component({
   selector: 'app-registration',
@@ -30,7 +31,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   isLoadingCountires$: Observable<boolean>;
   isLoadingHSCodes$: Observable<boolean>;
   dialogWidth: string = '50vw';
-
+  reverseLoader:boolean=false;
   selectedNodes: any;
   selectedCountry: any;
   isISICDialogVisible: boolean = false;
@@ -66,11 +67,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private _isicService: IsicService,
     private _hsCodeService: HSCodeService,
     private _register: PreRegsiterService,
-    private scrollAnims: ScrollAnimsService
+    private scrollAnims: ScrollAnimsService,
+    private _industry:IsicCodesService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     this.isLoadingCountires$ = this._countriesGet.isLoading$;
-    this.isLoadingIsicCodes$ = this._isicService.isLoading$;
+    this.isLoadingIsicCodes$ = this._industry.isLoading$;
     this.isLoadingConsultingFields$ = this._consultingFieldsService.isLoading$;
     this.isLoadingHSCodes$ = this._hsCodeService.isLoading$;
     this.isLoadingSubmit$ = this._register.isLoading$;
@@ -117,15 +119,16 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
 
   loadISIC() {
-    this._isicService.getIsicCodes().pipe(first()).subscribe({
-      next: (res) => {
-        console.log('ISIC DATA', res);
-        this.nodes = this.buildTreeNodes(res);
+    this.reverseLoader=true;
+    const isicSub = this._industry.getIsicCodesTree().subscribe({
+      next: (res:any) => {
+        this.nodes = res;
       },
-      error: (err) => {
+      error: (err:any) => {
         console.error('Error fetching ISIC codes:', err);
       },
     });
+    this.unsubscribe.push(isicSub);
   }
 
   buildTreeNodes(data: any[]): TreeNode[] {
@@ -147,22 +150,26 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.isISICDialogVisible = true;
   }
 
+
   onISICDialogOK() {
     this.isISICDialogVisible = false;
-    // Any additional processing if needed
+    // Update the form control 'isicCodes' with selected nodes
+    const selectedIsicCodes = this.selectedNodes.map((node: any) => node);
+    this.registrationForm.get('isicCodes')?.setValue(selectedIsicCodes);
+    this.registrationForm.get('isicCodes')?.markAsTouched();
+    console.log("this.selectedNodoes on Dialog", this.selectedNodes);
   }
-
+  
   onISICDialogCancel() {
     this.isISICDialogVisible = false;
   }
-
   selectedNodesLabel(): string {
     if (this.selectedNodes && this.selectedNodes.length > 0) {
-      return this.selectedNodes.map((node:any) => node.label).join(', ');
+      return this.selectedNodes.map((node: any) => node.label).join(', ');
     } else {
       return '';
     }
-  }
+  }  
 
   getConsultingFields() {
     const getConsultingFieldsSub = this._consultingFieldsService.getConsultingFields().subscribe({
@@ -200,7 +207,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     });
     this.unsubscribe.push(getCountriesSub);
   }
-
+  onImageError(country: any): void {
+    country.flagPath = `../../../../../assets/media/flags/default.svg`; // Set a default image path
+  }
   setOptionLabel() {
     if (this.lang === 'en') {
       this.optionLabel = 'name.en';
@@ -228,6 +237,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         consultingField: [[], Validators.required],
         otherConsultingField: ['', Validators.maxLength(100)],
         agree: [true],
+        isicCodes:[[],Validators.required]
       },
       {
         validator: ConfirmPasswordValidator.MatchPassword,
@@ -269,7 +279,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         password: '',
         confirm_password: '',
         country_id: 1,
-        isic_codes: [],
+        industry_ids: [],
         consulting_feild_ids: [],
         hs_code: '',
         description: '',
@@ -280,7 +290,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       newUser.password = this.registrationForm.get('password')?.value;
       newUser.confirm_password = this.registrationForm.get('password')?.value;
       newUser.country_id = this.selectedCountry.id;
-      newUser.isic_codes = this.selectedNodes.map((node:any) => node.data.id);
+      console.log('this.selectedNodes',this.selectedNodes);
+      newUser.industry_ids = this.selectedNodes.map((node:any) => node.data.key);
       newUser.consulting_feild_ids = this.registrationForm
         .get('consultingField')
         ?.value.map((field: any) => field.id);
