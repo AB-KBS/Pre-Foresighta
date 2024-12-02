@@ -26,7 +26,7 @@
         <!-- begin::Name Field-->
         <div class="row mb-4">
           <div class="col-12 col-md-6 mb-4">
-            <label class="form-label fs-6 text-gray-900">{{
+            <label class="form-label fs-6 text-gray-900 required">{{
               "AUTH.REGISTRATION.FIRSTNAME_LABEL" | translate
             }}</label>
             <input
@@ -72,7 +72,7 @@
             ></ng-container>
           </div>
           <div class="col-12 col-md-6">
-            <label class="form-label fs-6 text-gray-900">{{
+            <label class="form-label fs-6 text-gray-900 required">{{
               "AUTH.REGISTRATION.LASTNAME_LABEL" | translate
             }}</label>
             <input
@@ -121,7 +121,7 @@
         <!--::Password group-->
         <div class="row mb-4">
           <div class="col-md-6 col-12 mb-4">
-            <label class="form-label text-gray-900 fs-6 mb-0">{{
+            <label class="form-label text-gray-900 fs-6 mb-0 required">{{
               "AUTH.REGISTRATION.EMAIL_LABEL" | translate
             }}</label>
             <input
@@ -176,7 +176,7 @@
           </div>
           <!--begin::Form group-->
           <div class=" col-md-6 col-12  position-relative">
-            <label class="m-0 form-label fs-6 text-gray-900">{{
+            <label class="m-0 form-label fs-6 text-gray-900 required">{{
               "AUTH.REGISTRATION.PASSWORD_LABEL" | translate
             }}</label>
           <p-password 
@@ -231,7 +231,7 @@
             'col-md-6' : !isOtherSelected ,
             'col-md-4' : isOtherSelected
             }">
-            <label class="form-label fs-6 text-gray-900">{{
+            <label class="form-label fs-6 text-gray-900 required">{{
               "AUTH.REGISTRATION.COUNTRY_LABEL" | translate
             }}</label>
             <p-progressBar
@@ -271,7 +271,7 @@
             'col-md-6' : !isOtherSelected ,
             'col-md-4' : isOtherSelected
             }">
-            <label class="form-label fs-6 text-gray-900">{{
+            <label class="form-label fs-6 text-gray-900 required">{{
               "AUTH.REGISTRATION.CONSULTING_FIELD_LABEL" | translate
             }}</label>
             <p-progressBar
@@ -296,7 +296,7 @@
         'col-md-6' : !isOtherSelected ,
         'col-md-4' : isOtherSelected
         }" *ngIf="isOtherSelected">
-        <label class="form-label text-gray-900 fs-6">
+        <label class="form-label text-gray-900 fs-6 required">
           {{ "AUTH.REGISTRATION.OTHER_FIELD_LABEL" | translate }}
           <!-- Label for Other Consulting Field -->
         </label>
