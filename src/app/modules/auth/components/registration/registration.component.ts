@@ -231,9 +231,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.required,
             Validators.minLength(8),
             Validators.maxLength(100),
-            Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
+            Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\W_]{8,}$/),
           ],
         ],
+        
         consultingField: [[], Validators.required],
         otherConsultingField: ['', Validators.maxLength(100)],
         agree: [true],
