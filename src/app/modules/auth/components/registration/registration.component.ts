@@ -101,7 +101,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private _countriesGet: CountryService,
     public translate: TranslationService,
     private _consultingFieldsService: ConsultingFieldService,
-    private _isicService: IsicService,
     private _hsCodeService: HSCodeService,
     private _register: PreRegsiterService,
     private scrollAnims: ScrollAnimsService,
@@ -122,8 +121,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       this.scrollAnims.scrollAnimations();
     }, 100);
   }
-
-
   ngOnInit(): void {
 
     //  window.addEventListener('resize', this.updateDialogWidth.bind(this));
@@ -143,9 +140,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.loadISIC();
     this.windowResize()
   }
-
-  
-
   windowResize(){
     const screenwidth$ = fromEvent(window,'resize').pipe(
       map(()=>window.innerWidth),
@@ -157,8 +151,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       console.log(this.dialogWidth);
     })
   }
-
-
   loadISIC() {
     this.reverseLoader=true;
     const isicSub = this._industry.getIsicCodesTree().subscribe({
@@ -253,12 +245,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   getListOfCountries() {
-    const getCountriesSub = this._countriesGet.getCountries().subscribe({
+    const getCountriesSub = this._countriesGet.getCountries(this.lang ? this.lang : 'en').subscribe({
       next: (res) => {
         this.countries = res.map((country: ICountry) => ({
           ...country,
           flagPath: `../../../../../assets/media/flags/${country.flag}.svg`,
         }));
+        this.updateCountryLabels();
       },
       error: (err) => {
         console.log('err', err);
@@ -266,6 +259,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     });
     this.unsubscribe.push(getCountriesSub);
   }
+
+  updateCountryLabels() {
+    this.countries = this.countries.map((country:any) => ({
+      ...country,
+      label: country.name[this.lang] || country.name.en
+    }));
+  }
+
   onImageError(country: any): void {
     country.flagPath = `../../../../../assets/media/flags/default.svg`; // Set a default image path
   }

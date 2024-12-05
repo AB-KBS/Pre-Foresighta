@@ -43,42 +43,50 @@
 <!--begin::Aside-->
 <div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
   <!--begin::Aside-->
-  <div class="d-flex flex-center flex-lg-start flex-column justify-content-between w-100">
+  <div class="d-flex flex-center flex-lg-start flex-column justify-content-between w-100 pt-15">
     <!--begin::Logo-->
     <div class="d-flex flex-column pb-20">
-      <a  class="mb-7">
-        <img
+      <a  class="mb-7 logo-foresighta">
+        <img *ngIf="lang==='en'"
           alt="Logo"
           src="../../../../../assets/media/logos/dark-logo-full.svg"
           class="height-logo"
         />
+        <img *ngIf="lang==='ar'"
+          alt="Logo"
+          src="../../../../../assets/media/logos/dark-logo-full-ar.svg"
+          class="height-logo"
+        />
       </a>
-      <h5 class="h4 font-weight-bold text-white fs-3 fw-bold py-2">
+      <h5 class="h4 less-text  font-weight-bold text-white fs-3hx fw-bolder py-2">
         {{ "AUTH.REGISTRATION.EMPOWER_INSIGHTS_TITLE" | translate }}
       </h5>
       <p
-        class="text-gray-200 fs-6"
+        class="text-gray-200 fs-5 less-text"
         [innerHTML]="'AUTH.REGISTRATION.EMPOWER_INSIGHTS_TEXT' | translate"
       ></p>
     </div>
     <div class="d-flex justify-content-center align-items-center w-100">
           <!--begin::Carousel-->
-          <ngb-carousel [interval]="5000" [wrap]="true" [keyboard]="true" [pauseOnHover]="true">
+          <ngb-carousel [interval]="8000" [wrap]="true" [keyboard]="true" [pauseOnHover]="true">
             <ng-template ngbSlide *ngFor="let slide of slides; let i = index">
               <div class="d-flex flex-column justify-content-center glass mb-4 m-auto w-100 " style="min-height: 170px;"  >
-                <h5 class="h4 font-weight-bold text-white fs-3 fw-bold py-2">
+                <h5 class="h4 font-weight-bold text-white fs-2 fw-bold py-2">
                 {{slide.title | translate}}
                 </h5>
                 <p
-                  class="text-gray-200 fs-6">
+                  class="text-gray-200 fs-5">
                 {{slide.text | translate}}</p>
               </div>
               
             </ng-template>
           </ngb-carousel>
           <!--end::Carousel-->
+         
     </div>
-
+    <div class="text-center m-auto pt-15 text-white d-none d-lg-block">
+      <p>{{ "COMMON.COPYRIGHT" | translate }}</p>
+    </div>
     <!--end::Title-->
   </div>
   <!--end::Aside-->
@@ -126,7 +134,7 @@
                     }}</label>
                     <input
                     pInputText
-                    class="w-100 form-control" 
+                    class="w-100" 
                       type="text"
                       name="firstName"
                       formControlName="firstName"
@@ -174,7 +182,7 @@
                     pInputText
                       type="text"
                       name="lastName"
-                      class="w-100 form-control" 
+                      class="w-100"
                       formControlName="lastName"
                       placeholder="{{
                         'AUTH.REGISTRATION.LASTNAME_PLACEHOLDER' | translate
@@ -221,7 +229,7 @@
                     }}</label>
                     <input
                     pInputText
-                    class="w-100 form-control"
+                    class="w-100"
                       type="email"
                       placeholder="{{
                         'AUTH.REGISTRATION.EMAIL_PLACEHOLDER' | translate
@@ -336,24 +344,26 @@
                     *ngIf="(isLoadingCountires$ | async) === false"
                     [options]="countries"
                     [(ngModel)]="selectedCountry"
-                    [ngModelOptions]="{standalone: true}"
-                    class="d-block form-p-control country-list"
-                    [optionLabel]="optionLabel"
+                    [optionLabel]="'label'"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="d-block"
                     placeholder="{{ 'AUTH.REGISTRATION.COUNTRY_PLACEHOLDER' | translate }}"
                     [filter]="true"
                     [showClear]="true"
                   >
                     <ng-template pTemplate="item" let-country>
                       <div class="country-option">
-                        <img [src]="country.flagPath || 'assets/default-flag.png'"
-                        alt="{{ country.name.en }}"
-                        class="flag-icon"
-                        (error)="onImageError(country)" />
-                   
-                        <span>{{ country.name.en }}</span>
+                        <img
+                          [src]="country.flagPath || 'assets/default-flag.png'"
+                          alt="{{ country.name.en }}"
+                          class="flag-icon"
+                          (error)="onImageError(country)"
+                        />
+                        <span>{{ country.label }}</span>
                       </div>
                     </ng-template>
                   </p-dropdown>
+                  
                   
                     <!-- Validation for country -->
                   </div>
@@ -376,6 +386,7 @@
                   [loading]="isLoadingIsicCodes$ | async"
                   [options]="consultingNodes"
                   [metaKeySelection]="false"
+                  [filter]="true"
                   selectionMode="checkbox"
                   placeholder="{{ 'AUTH.REGISTRATION.CONSULTING_FIELD_PLACEHOLDER' | translate }}"
                   [ngModelOptions]="{standalone: true}"
@@ -392,7 +403,8 @@
                
                 <input
                   type="text"
-                  class="form-control"
+                 pInputText
+                 class="w-100 d-block"
                   [readonly]="reverseLoader"
                   placeholder="{{
                     'AUTH.REGISTRATION.INDUSTRY_PLACEHOLDER' | translate
@@ -464,17 +476,14 @@
                       </span>
                     </ng-container>
                   </button>
+                  <!-- Terms and Conditions -->
+<div class="mt-4 text-center">
+    <span class="ml-2">
+      {{ "AUTH.REGISTRATION.TERMS_CONDITIONS" | translate }}
+    </span>
+</div>
                 </div>
-                <!--end::Form group-->
-        
-                <!--begin::Sign up-->
-                <!-- <div class="text-gray-500 text-center fw-semibold fs-6">
-                  {{ "AUTH.REGISTRATION.ALREADY_HAVE_ACCOUNT" | translate }}
-                  <a routerLink="/auth/login" class="link-primary fw-semibold">{{
-                    "AUTH.REGISTRATION.SIGN_IN" | translate
-                  }}</a>
-                </div> -->
-                <!--end::Sign up-->
+              
               </form>
            
               <ng-template
@@ -506,4 +515,8 @@
     </div>
     <!--end::Body-->
   </div>
+    <!-- Copyright -->
+    <div class="text-center m-auto pt-15 text-white d-block d-lg-none">
+      <p>{{ "COMMON.COPYRIGHT" | translate }}</p>
+    </div>
 </div>

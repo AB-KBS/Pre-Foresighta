@@ -65,7 +65,7 @@ export const locale = {
       },
       REGISTRATION: {
         TITLE: "التسجيل",
-        ISIC_CODES_REQUIRED:"الصناعة مطلوبة",
+        ISIC_CODES_REQUIRED:"قطاع الاعمال مطلوب",
         SUBTITLE: "ادخل معلوماتك لإنشاء حسابك",
         GOOGLE_SIGNUP: "عن طريق قوقل",
         LINKEDIN_SIGNUP: "عن طريق لكندان",
@@ -81,6 +81,7 @@ export const locale = {
         ERROR: "تفاصيل التسجيل غير صحيحة",
         LASTNAME_LABEL: "اسم العائلة",
         LASTNAME_PLACEHOLDER: "اسم العائلة",
+        TERMS_CONDITIONS: "خاضع للشروط والأحكام وسياسة الخصوصية.",
         LASTNAME_REQUIRED: "اسم العائلة مطلوب",
         LASTNAME_MINLENGTH: "يجب أن يحتوي اسم العائلة على 3 أحرف على الأقل",
         LASTNAME_MAXLENGTH: "يجب أن يحتوي اسم العائلة على 100 حرف كحد أقصى",
@@ -116,7 +117,7 @@ export const locale = {
         SIGN_IN: "تسجيل الدخول",
         COUNTRY_LABEL: "البلد",
         COUNTRY_PLACEHOLDER: "اختر بلدك",
-        INDUSTRY_PLACEHOLDER: "اختر الصناعة",
+        INDUSTRY_PLACEHOLDER: "اختر قطاع الاعمال",
         COUNTRY_REQUIRED: "البلد مطلوب",
         CONSULTING_FIELD_LABEL: "التخصص الاستشاري",
         CONSULTING_FIELD_PLACEHOLDER: "اختر تخصصك الاستشاري",
@@ -124,7 +125,7 @@ export const locale = {
         OTHER_FIELD_LABEL: "تخصص آخر",
         OTHER_FIELD_PLACEHOLDER: "أدخل تخصصك الآخر",
         OTHER_FIELD_REQUIRED: "التخصص الآخر مطلوب",
-        INDUSTRY: "الصناعة",
+        INDUSTRY: "قطاع الاعمال",
         HSCODE: "HS-Code",
         SLIDE_ONE:"جمهورك العالم.",
         SLIDE_ONE_CONTENT:"من خلال مشاركتك رؤاك وخبراتك للأفراد والشركات في العالم أجمع، ستحدث أبحاثك وتقاريرك تغيراً ملموساً في صناعة القرار",
@@ -185,7 +186,8 @@ export const locale = {
     },
     COMMON: {
       SLOGAN: "أفقًا جديدًا لعالم الرؤى",
-      "SELECISCIC":"اختر الصناعة"
+      "SELECISCIC":"اختر قطاع الاعمال",
+      "COPYRIGHT": "© 2024 فورسايتا. جميع الحقوق محفوظة."
     },
   },
 };
