@@ -58,7 +58,7 @@ export const locale = {
         EMAIL_REQUIRED: "Email is required",
         WELCOME_LOGIN: "Welcome To Foresighta",
         EMAIL_INVALID: "Email is invalid",
-        PRE:"Preregistraion",
+        PRE:"Pre-Registration",
         PASSWORD_LABEL: "Password",
         PASSWORD_REQUIRED: "Password is required",
         FORGOT_PASSWORD: "Forgot Password?",
