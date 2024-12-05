@@ -133,7 +133,7 @@ export const locale = {
         "OTHER_FIELD_PLACEHOLDER": "Enter your other field",
         "OTHER_FIELD_REQUIRED": "Other field is required",
         "INDUSTRY": "Industry",
-        "PRE":"Preregistration",
+        "PRE":"Pre-Registration",
         "INDUSTRY_PLACEHOLDER": "Select industry",
         "HSCODE": "HS-Code",
         "THANK_YOU_TITLE": "Thank you!",
