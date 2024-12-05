@@ -26,6 +26,8 @@ import { ToastModule } from 'primeng/toast';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -41,9 +43,12 @@ import { CallbackComponent } from './components/callback/callback.component';
   ],
   imports: [
     CommonModule,
+    NgbCarouselModule,
     AuthRoutingModule,
     TranslationModule,
+    NgbModule, // Add NgbModule to imports,
     DialogModule,
+    CarouselModule.forRoot(),
     TreeSelectModule,
     MessagesModule,
     SweetAlert2Module.forChild(),

@@ -64,7 +64,8 @@ html[dir="rtl"] .p-dropdown .p-dropdown-clear-icon {
 }
 
 .p-multiselect-clearable .p-multiselect-label-container {
-    padding-right: 1.5rem;
+    padding-inline-end: 1.5rem !important;
+    padding-inline-start: 0 !important;
 }
 
 /* Dialog Content Overflow */
@@ -223,20 +224,26 @@ html[dir='rtl'] .home-countries-dropdown .p-dropdown-panel {
 }
 
 /* Font Family Based on Direction */
-html[dir="ltr"] .p-element {
+html[dir="ltr"] .p-element ,html[dir="ltr"] .p-treeselect {
     font-family: 'Inter', sans-serif !important;
 }
 
-html[dir="rtl"] .p-element {
+html[dir="rtl"] .p-element ,html[dir="rtl"] .p-treeselect{
     font-family: 'Tajawal', sans-serif !important;
 }
+
+html[dir='rtl']  .consulting-tree .p-tree-toggler-icon{
+    transform: rotate(180deg) !important;
+}
+html[dir='ltr'] .consulting-tree  .p-tree-toggler-icon{
+transform: rotate(0deg) !important;
+}
+
 .p-treenode-content{
     gap: 10px !important;
     }
     
-     ul.p-tree-container{
-        direction: ltr !important;
-    }
+  
    
 
       html[dir='ltr']   .p-input-icon-right > .p-icon-wrapper{
@@ -247,7 +254,12 @@ html[dir="rtl"] .p-element {
             left: 0.75rem !important;
             right: unset !important;
           }
-
+          html[dir='rtl']  .industry-tree .p-tree-toggler-icon{
+            transform: rotate(180deg) !important;
+}
+html[dir='ltr'] .industry-tree  .p-tree-toggler-icon{
+    transform: rotate(0deg) !important;
+}
           .p-checkbox .p-checkbox-box {
             border: 1px solid #d1d5db  !important;
             width: 18px !important;
@@ -259,3 +271,55 @@ html[dir="rtl"] .p-element {
            display: flex;
            align-items: center;
         }
+        .no-border-radius-start-end .p-dropdown {
+            border-end-end-radius: 0px !important;
+            border-start-end-radius: 0px !important;
+
+          }
+          html[dir='rtl'] .no-rtl-b-radius{
+            border-radius: 0px !important;
+          }
+
+          .flex-1{
+            flex: 1;
+          }
+          .flex-2{
+            flex: 2;
+          }
+          .flex-3{
+            flex: 3;
+          }
+          .flex-4{
+            flex: 4;
+          }
+          .p-message .p-message-icon {
+            margin-left: 0.5rem !important;
+            display: flex !important;
+          }
+
+         
+        .p-password-input{
+            height:3.3rem !important ;
+            border-color: #DBDFE9 !important;
+        }
+        .carousel-indicators{
+            top: 100% !important;
+        }
+        .carousel-inner {
+            width: 80% !important;
+            margin: auto !important;}
+
+
+            /* Target second-level nodes within the industry-tree */
+            html[dir='rtl']   .industry-tree ul{
+                padding-left: 0 !important;
+                padding-right: 2rem !important;
+            }
+            html[dir='ltr']   .industry-tree ul{
+                padding-left: 2rem !important;
+                padding-right: 0 !important;
+            }
+
+           .country-list .p-dropdown-trigger{
+            padding-inline-start:25px !important ;
+            }
