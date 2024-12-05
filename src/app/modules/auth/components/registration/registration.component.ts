@@ -1,5 +1,5 @@
 import { UpgradePlanModalComponent } from './../../../../_metronic/partials/layout/modals/upgrade-plan-modal/upgrade-plan-modal.component';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, Observable, fromEvent } from 'rxjs';
 import { Router } from '@angular/router';
@@ -17,6 +17,8 @@ import { ScrollAnimsService } from 'src/app/_fake/services/scroll-anims/scroll-a
 import { Message, TreeNode } from 'primeng/api';
 import { IsicService } from 'src/app/_fake/services/isic/isic.service';
 import { IsicCodesService } from 'src/app/_fake/services/industry/industry.service';
+import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { ConsultingTreeService } from 'src/app/_fake/services/Tree-Consulting-Field/tree-consulting.service';
 
 @Component({
   selector: 'app-registration',
@@ -30,12 +32,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   isLoadingIsicCodes$: Observable<boolean>;
   isLoadingCountires$: Observable<boolean>;
   isLoadingHSCodes$: Observable<boolean>;
+  isLoadingTreeCons$: Observable<boolean>;
   dialogWidth: string = '50vw';
   reverseLoader:boolean=false;
   selectedNodes: any;
   selectedCountry: any;
   isISICDialogVisible: boolean = false;
-
+  selectedNodesCons:any;
   messages: Message[] = [];
   passwordFieldType: string = 'password';
   confirmPasswordFieldType: string = 'password';
@@ -46,6 +49,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   isic: any;
   isicCodes: any[] = [];
   nodes: TreeNode[] = []; // Corrected type
+  consultingNodes: TreeNode[] = []; // Corrected type
   hsCodes: any[] = [];
   optionLabelHSCode: string;
   lang: string;
@@ -56,7 +60,40 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   countries: ICountry[];
 
   resizeSubscription!: Subscription;
+  @ViewChild('carousel', { static: true }) carousel!: NgbCarousel;
 
+  currentSlide: number = 0;
+
+  slides = [
+    {
+      title: 'AUTH.REGISTRATION.SLIDE_ONE',
+      text: 'AUTH.REGISTRATION.SLIDE_ONE_CONTENT'
+    },
+    {
+      title: 'AUTH.REGISTRATION.SLIDE_TWO',
+      text: 'AUTH.REGISTRATION.SLIDE_TWO_CONTENT'
+    },
+    {
+      title: 'AUTH.REGISTRATION.SLIDE_THREE',
+      text: 'AUTH.REGISTRATION.SLIDE_THREE_CONTENT'
+    }
+  ];
+
+  // Navigate to the previous slide
+  prevSlide() {
+    this.carousel.prev();
+  }
+
+  // Navigate to the next slide
+  nextSlide() {
+    this.carousel.next();
+  }
+
+  // Select a specific slide
+  selectSlide(slideNumber: number) {
+    this.carousel.select(`slide-${slideNumber}`);
+    this.currentSlide = slideNumber;
+  }
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -68,7 +105,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private _hsCodeService: HSCodeService,
     private _register: PreRegsiterService,
     private scrollAnims: ScrollAnimsService,
-    private _industry:IsicCodesService
+    private _industry:IsicCodesService,
+    private _consultingTree:ConsultingTreeService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     this.isLoadingCountires$ = this._countriesGet.isLoading$;
@@ -76,6 +114,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.isLoadingConsultingFields$ = this._consultingFieldsService.isLoading$;
     this.isLoadingHSCodes$ = this._hsCodeService.isLoading$;
     this.isLoadingSubmit$ = this._register.isLoading$;
+    this.isLoadingTreeCons$ =this._consultingTree.isLoading$
   }
 
   ngAfterViewInit(): void {
@@ -97,12 +136,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     });
     this.getListOfCountries();
     this.setOptionLabel();
+    this.getTreeConsulting()
     this.initForm();
     this.getConsultingFields();
     this.onConsultingFieldChange();
     this.loadISIC();
     this.windowResize()
   }
+
   
 
   windowResize(){
@@ -131,6 +172,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.unsubscribe.push(isicSub);
   }
 
+  getTreeConsulting(){
+    const treeSub = this._consultingTree.getIsicCodesTree(this.lang ? this.lang : 'en')
+    .subscribe(
+      {
+        next:(res)=>{
+          this.consultingNodes=res;
+        },
+        error:(error)=>{}
+      }
+    );
+    this.unsubscribe.push(treeSub)
+  }
   buildTreeNodes(data: any[]): TreeNode[] {
     return data.map((item) => this.transformToTreeNode(item));
   }
@@ -150,7 +203,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.isISICDialogVisible = true;
   }
 
-
+  getSelectedItemsLabel(selectedNodes: TreeNode[]): string {
+    if (!selectedNodes || selectedNodes.length === 0) {
+      return 'No items selected';
+    }
+    return `${selectedNodes.length} items selected`;
+  }
+  
   onISICDialogOK() {
     this.isISICDialogVisible = false;
     // Update the form control 'isicCodes' with selected nodes
@@ -234,9 +293,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\W_]{8,}$/),
           ],
         ],
-        
-        consultingField: [[], Validators.required],
-        otherConsultingField: ['', Validators.maxLength(100)],
         agree: [true],
         isicCodes:[[],Validators.required]
       },
@@ -271,7 +327,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    if (this.registrationForm.valid && this.selectedNodes.length > 0 && this.selectedCountry) {
+    if (this.registrationForm.valid && this.selectedNodes.length > 0 && this.selectedCountry
+      && this.selectedNodesCons.length>0
+    ) {
       this.hasError = false;
       const newUser: UserPreRegistration = {
         first_name: '',
@@ -293,9 +351,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       newUser.country_id = this.selectedCountry.id;
       console.log('this.selectedNodes',this.selectedNodes);
       newUser.industry_ids = this.selectedNodes.map((node:any) => node.data.key);
-      newUser.consulting_feild_ids = this.registrationForm
-        .get('consultingField')
-        ?.value.map((field: any) => field.id);
+      newUser.consulting_feild_ids = this.selectedNodesCons.map((field: any) => field.key);
       newUser.description = this.registrationForm.get('aboutDescription')?.value || null;
       newUser.other_consulting_field = this.registrationForm.get('otherConsultingField')?.value || null;
       console.log("newUser",newUser);

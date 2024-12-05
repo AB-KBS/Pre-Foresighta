@@ -58,6 +58,7 @@ export const locale = {
         EMAIL_REQUIRED: "Email is required",
         WELCOME_LOGIN: "Welcome To Foresighta",
         EMAIL_INVALID: "Email is invalid",
+        PRE:"Preregistraion",
         PASSWORD_LABEL: "Password",
         PASSWORD_REQUIRED: "Password is required",
         FORGOT_PASSWORD: "Forgot Password?",
@@ -132,6 +133,7 @@ export const locale = {
         "OTHER_FIELD_PLACEHOLDER": "Enter your other field",
         "OTHER_FIELD_REQUIRED": "Other field is required",
         "INDUSTRY": "Industry",
+        "PRE":"Preregistration",
         "INDUSTRY_PLACEHOLDER": "Select industry",
         "HSCODE": "HS-Code",
         "THANK_YOU_TITLE": "Thank you!",
@@ -146,13 +148,15 @@ export const locale = {
         `,
         "EMPOWER_INSIGHTS_TITLE": "Unlock Your Expertise with Foresighta.",
         "EMPOWER_INSIGHTS_TEXT": `
-        Upload your reports and research works and start generating revenue from your insights every time visitors download your work. <br /><br />
-          <span class="text-dark font-weight-bolder" ><strong>Reach a Global Audience.</strong></span><br><br> Your insights will have a meaningful impact on millions of individuals, businesses, and decision-makers worldwide.<br /><br />
-          <span class="text-dark font-weight-bolder" ><strong>Foresighta redefines the consulting journey.</strong></span><br><br>
-          Engage flexibly with visitors who can reach out for expert opinions, tailored guidance, and one-on-one consultations. Now, you can Build your ideal project team from a pool of expert consultants to help you execute projects seamlessly and achieve your project objectives.
-          <br><br><span class="text-dark font-weight-bolder" ><strong>Work at your convenience, work any time.</strong></span> <br><br>
-          Bring your reports and studies out of the drawer and let your experience shine. Your wealth of knowledge is valued and many are eager to learn from it.
+        Upload your reports and research works and start generating revenue from your insights every time visitors download your work.
+
         `,
+        SLIDE_ONE:"Reach a Global Audience.",
+        SLIDE_ONE_CONTENT:"Your insights will have a meaningful impact on millions of individuals, businesses, and decision-makers worldwide.",
+        SLIDE_TWO:"Foresighta redefines the consulting journey.",
+        SLIDE_TWO_CONTENT:" Engage flexibly with visitors who can reach out for expert opinions, tailored guidance, and one-on-one consultations. Now, you can Build your ideal project team from a pool of expert consultants to help you execute projects seamlessly and achieve your project objectives.",
+        SLIDE_THREE:"Work at your convenience, work any time.",
+        SLIDE_THREE_CONTENT:"Bring your reports and studies out of the drawer and let your experience shine. Your wealth of knowledge is valued and many are eager to learn from it.",
         "OPTIONAL": "Optional",
         "PREREGISTERATION": "Pre-register now",
         "ABOUT_DESCRIPTION_LABEL": "About You",
