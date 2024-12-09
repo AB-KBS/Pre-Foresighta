@@ -121,6 +121,7 @@ export const locale = {
         "RESEND_EMAIL": "Resend Email",
         "SUBMIT": "Submit",
         "PLEASE_WAIT": "Please wait...",
+        "TERMS_CONDITIONS": "Subject to terms and conditions and privacy policy.",
         "ALREADY_HAVE_ACCOUNT": "Already have an account?",
         "SIGNIN_LINK": "Sign in",
         "COUNTRY_LABEL": "Country",
@@ -133,6 +134,7 @@ export const locale = {
         "OTHER_FIELD_PLACEHOLDER": "Enter your other field",
         "OTHER_FIELD_REQUIRED": "Other field is required",
         "INDUSTRY": "Industry",
+        "Specify":"Specify other...",
         "PRE":"Pre-Registration",
         "INDUSTRY_PLACEHOLDER": "Select industry",
         "HSCODE": "HS-Code",
@@ -222,7 +224,8 @@ export const locale = {
     },
     COMMON:{
       "SLOGAN":"Redefining the insights landscape",
-      "SELECISCIC":"Select Industry"
+      "SELECISCIC":"Select Industry",
+      "COPYRIGHT": "© 2024 Foresighta. All rights reserved."
     }
   }
 };

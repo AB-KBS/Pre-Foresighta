@@ -62,7 +62,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
   }
 
   getListOfCountries() {
-    const getCountriesSub = this._countriesGet.getCountries().subscribe({
+    const getCountriesSub = this._countriesGet.getCountries('en').subscribe({
       next: (res) => {
         this.countries = res.map((country: Country) => ({
           ...country,

@@ -20,7 +20,7 @@ export class CountryService {
     return throwError(() => new Error('Could not get countires list; please try again later.'));
   }
 
-  getCountries(lang: string = 'ar'): Observable<any> {
+  getCountries(lang:string): Observable<any> {
     const headers = new HttpHeaders({
       'Accept': 'application/json',
       'Content-Type': 'application/json',

@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, finalize, map, throwError } from 'rxjs';
-
+export interface otherfiled{
+  parent_id: number,
+  consulting_field:string,
+}
 @Injectable({
   providedIn: 'root'
 })
 export class ConsultingFieldService {
   private apiUrl = 'https://myinsighta.com/api/consulting-field';
+  private addUrl = 'https://myinsighta.com/api/add-consulting-field'
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   public isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
 
@@ -33,5 +37,21 @@ export class ConsultingFieldService {
       catchError(this.handleError),
       finalize(() => this.setLoading(false))
     );
+
+    
   }
+  addOtherConsultingField(lang:string,payload:otherfiled):Observable<any>{
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'lang': lang
+    });
+
+    return this.http.post<any>(this.addUrl,payload,{ headers }).pipe(
+      map(res => res),
+      catchError(this.handleError),
+      finalize(() => this.setLoading(false))
+    );
+  }
+
 }
