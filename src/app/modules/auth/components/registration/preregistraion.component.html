@@ -39,10 +39,10 @@
             [innerHTML]="'AUTH.REGISTRATION.EMPOWER_INSIGHTS_TEXT' | translate"
           ></p>
         </div>
-        <div class="d-flex w-100">
+        <div class="d-flex w-100 cars-container " >
           <!--begin::Carousel-->
           <ngb-carousel
-            [interval]="8000"
+            [interval]="12000"
             [wrap]="true"
             [keyboard]="true"
             [pauseOnHover]="true"
@@ -50,23 +50,22 @@
           >
             <ng-template ngbSlide *ngFor="let slide of slides; let i = index">
               <div
-                class="d-flex flex-column justify-content-center glass mb-4 m-auto w-100"
+                class="d-flex flex-column justify-content-start glass mb-4 m-auto w-100"
                 style="min-height: 170px"
               >
-                <h5 class="h4 font-weight-bold text-white fs-2 fw-bold py-2">
-                  {{ slide.title | translate }}
+                <h5 class="h4 font-weight-bold text-white fs-2 fw-bold py-2" [innerHTML]=" slide.title | translate">
                 </h5>
-                <p class="text-gray-200 fs-5">
-                  {{ slide.text | translate }}
+                <p class="text-gray-200 fs-5" [innerHTML]=" slide.text | translate ">
                 </p>
               </div>
             </ng-template>
           </ngb-carousel>
           <!--end::Carousel-->
+          <div class="text-inline-start  copyright text-white d-none d-lg-block">
+            <p>{{ "COMMON.COPYRIGHT" | translate }}</p>
+          </div>
         </div>
-        <div class="text-center m-auto pt-15 text-white d-none d-lg-block">
-          <p>{{ "COMMON.COPYRIGHT" | translate }}</p>
-        </div>
+        
         <!--end::Title-->
       </div>
       <!--end::Aside-->

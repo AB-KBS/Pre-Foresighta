@@ -304,7 +304,11 @@ html[dir='ltr'] .industry-tree  .p-tree-toggler-icon{
         }
         .carousel-inner {
             width: 80% !important;
-            margin: auto !important;}
+            @media screen and (max-width:992px) {
+                justify-content: center !important;
+                margin: auto !important;
+            }
+           }
 
 
             /* Target second-level nodes within the industry-tree */
@@ -323,3 +327,14 @@ html[dir='ltr'] .industry-tree  .p-tree-toggler-icon{
             .industry-tree .p-checkbox-disabled{
                 display: none !important;
             }
+            .carousel-indicators{
+                justify-content: start !important;
+                margin-right:  0 !important;
+                margin-left:  0 !important;
+                @media screen and (max-width:992px) {
+                    justify-content: center !important;
+                    margin: auto !important;
+                }
+            }
+
+            

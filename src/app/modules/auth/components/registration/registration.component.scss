@@ -108,7 +108,17 @@ backdrop-filter: blur(7px);
 border: 1px solid rgba(255, 255, 255, 0.3);
 padding: 12px 20px;
   }
-
+.copyright{
+position: absolute;
+bottom: 20px;
+}
+.cars-container{
+  padding-bottom: 100px;
+  position: relative;
+  @media screen and (max-width:992px) {
+    padding-bottom: 20px;
+}
+}
   /* Custom Indicators */
 .custom-indicators {
   display: flex;
