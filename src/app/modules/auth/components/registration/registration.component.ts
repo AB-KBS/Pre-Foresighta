@@ -72,6 +72,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   slides = [
     {
+      title: 'AUTH.REGISTRATION.SLIDE_EIGHT',
+      text: 'AUTH.REGISTRATION.SLIDE_EIGHT_CONTENT'
+    },
+    {
+      title: 'AUTH.REGISTRATION.SLIDE_SEVEN',
+      text: 'AUTH.REGISTRATION.SLIDE_SEVEN_CONTENT'
+    },
+    {
+      title: 'AUTH.REGISTRATION.SLIDE_NINE',
+      text: 'AUTH.REGISTRATION.SLIDE_NINE_CONTENT'
+    },
+    {
       title: 'AUTH.REGISTRATION.SLIDE_ONE',
       text: 'AUTH.REGISTRATION.SLIDE_ONE_CONTENT'
     },
@@ -82,7 +94,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     {
       title: 'AUTH.REGISTRATION.SLIDE_THREE',
       text: 'AUTH.REGISTRATION.SLIDE_THREE_CONTENT'
-    }
+    },
+
+  
+   
   ];
 
   // Navigate to the previous slide

@@ -86,7 +86,7 @@ export const locale = {
       "REGISTRATION": {
         "TITLE": "Sign Up",
         ISIC_CODES_REQUIRED:"Industry is required",
-        "SUBTITLE": "Enter your details to create your account",
+        "SUBTITLE": "Pre-registration aims to build a base of experts to participate in the initial testing and launch phases of the innovative consulting business model (Foresighta).",
         "GOOGLE_SIGNIN": "Sign in with Google",
         "LINKEDIN_SIGNIN": "Sign in with LinkedIn",
         "GOOGLE_SIGNUP": "Sign up with Google",
@@ -150,7 +150,7 @@ export const locale = {
         `,
         "EMPOWER_INSIGHTS_TITLE": "Unlock Your Expertise with Foresighta.",
         "EMPOWER_INSIGHTS_TEXT": `
-        Upload your reports and research works and start generating revenue from your insights every time visitors download your work.
+        Upload your reports and research works and start generating revenue from your insights every time your consulting content is downloaded by researchers and visitors.
 
         `,
         SLIDE_ONE:"Reach a Global Audience.",
@@ -159,6 +159,22 @@ export const locale = {
         SLIDE_TWO_CONTENT:" Engage flexibly with visitors who can reach out for expert opinions, tailored guidance, and one-on-one consultations. Now, you can Build your ideal project team from a pool of expert consultants to help you execute projects seamlessly and achieve your project objectives.",
         SLIDE_THREE:"Work at your convenience, work any time.",
         SLIDE_THREE_CONTENT:"Bring your reports and studies out of the drawer and let your experience shine. Your wealth of knowledge is valued and many are eager to learn from it.",
+
+              // New Slides in English
+// English
+SLIDE_SEVEN: "We provide you with all the necessary tools for consulting work.",
+
+SLIDE_SEVEN_CONTENT: "Through the rooms feature, you will be able to invite experts in your project field to discussion and brainstorming sessions to come up with the best solutions. <strong>AI tools</strong> will help you record and summarize all results.<br><br> In addition, the AI-supported research center provides quick access to insights, studies, and data related to every part of your consulting project or needs.<br><br> You can also create surveys and questionnaires by selecting a real sample from the platform's expert and client database.<br><br> Moreover, you can communicate directly with experts and book consulting sessions, and take advantage of many other consulting work tools designed to enhance your workflow.",
+
+SLIDE_EIGHT: "Achieve Financial Independence!! Start your consulting business now.",
+
+SLIDE_EIGHT_CONTENT: "With Foresighta, you will get the perfect opportunity to start your consulting project with ease and convenience! We provide you with <strong>advanced AI tools</strong> that help you effectively establish your consulting entity.<br><br> Thanks to the largest database of experts in the region, you can easily recruit your team and distribute tasks efficiently, enabling you to complete your project without the need for complicated and expensive hiring processes.<br><br> Start your journey towards success and financial independence today with Foresighta! Join us and benefit from solutions that will open new horizons for you in the modern consulting world.",
+
+SLIDE_NINE: "Whether you are a large or small consulting company, we offer you an innovative business model to increase efficiency and maximize revenues.",
+
+SLIDE_NINE_CONTENT: "You will be able to greatly benefit from <strong>data, studies and research, and economic insights</strong> that you possess as an untapped knowledge base by sharing them as paid specialized segments, generating significant revenues from each download by clients.<br><br> Our innovative business model allows both large and small consulting companies to increase their efficiency and revenues by effectively monetizing their intellectual assets.",
+
+
         "OPTIONAL": "Optional",
         "PREREGISTERATION": "Pre-register now",
         "ABOUT_DESCRIPTION_LABEL": "About You",
