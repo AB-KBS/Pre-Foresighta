@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { TranslationService } from 'src/app/modules/i18n/translation.service';
 import { map, catchError, finalize } from 'rxjs/operators';
+import { otherfiled } from '../consulting-field/consulting-field.service';
 
 export interface IsicCode {
   key: number;
@@ -19,6 +20,7 @@ export interface IsicCode {
 })
 export class IsicCodesService {
   private apiUrl = 'https://api.foresighta.co/api/common/setting/industry/tree-list'; 
+  private addUrl = 'https://myinsighta.com/api/add-industry'; 
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   public isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
   currentLang: any = 'en';
@@ -139,6 +141,20 @@ export class IsicCodesService {
     });
     this.setLoading(true);
     return this.http.delete<any>(`https://api.foresighta.co/api/admin/setting/isic-code/${id}`, { headers }).pipe(
+      catchError(this.handleError),
+      finalize(() => this.setLoading(false))
+    );
+  }
+
+  addOtherIndustry(lang:string,payload:otherfiled):Observable<any>{
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'lang': lang
+    });
+
+    return this.http.post<any>(this.addUrl,payload,{ headers }).pipe(
+      map(res => res),
       catchError(this.handleError),
       finalize(() => this.setLoading(false))
     );

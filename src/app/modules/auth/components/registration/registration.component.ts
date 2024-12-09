@@ -9,7 +9,7 @@ import { first, map, startWith } from 'rxjs/operators';
 import { CountryService } from 'src/app/_fake/services/countries-api/countries-get.service';
 import { ICountry } from 'src/app/_fake/models/country.model';
 import { TranslationService } from 'src/app/modules/i18n';
-import { ConsultingFieldService } from 'src/app/_fake/services/consulting-field/consulting-field.service';
+import { ConsultingFieldService, otherfiled } from 'src/app/_fake/services/consulting-field/consulting-field.service';
 import { HSCodeService } from 'src/app/_fake/services/hs-code/hs-code.service';
 import { UserPreRegistration } from 'src/app/_fake/models/pre-user.model';
 import { PreRegsiterService } from 'src/app/_fake/services/pre-register/pre-regsiter.service';
@@ -29,16 +29,15 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean>;
   isLoadingConsultingFields$: Observable<boolean>;
   isLoadingSubmit$: Observable<boolean>;
-  isLoadingIsicCodes$: Observable<boolean>;
+
   isLoadingCountires$: Observable<boolean>;
   isLoadingHSCodes$: Observable<boolean>;
-  isLoadingTreeCons$: Observable<boolean>;
+
   dialogWidth: string = '50vw';
   reverseLoader:boolean=false;
-  selectedNodes: any;
+
   selectedCountry: any;
-  isISICDialogVisible: boolean = false;
-  selectedNodesCons:any;
+
   messages: Message[] = [];
   passwordFieldType: string = 'password';
   confirmPasswordFieldType: string = 'password';
@@ -48,8 +47,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   consultingFields: any[] = [];
   isic: any;
   isicCodes: any[] = [];
-  nodes: TreeNode[] = []; // Corrected type
-  consultingNodes: TreeNode[] = []; // Corrected type
+
   hsCodes: any[] = [];
   optionLabelHSCode: string;
   lang: string;
@@ -58,8 +56,16 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   optionLabelField: string = 'description.en';
   optionLabel: string = 'name.en';
   countries: ICountry[];
-
+  
+  selectedConsultingFieldNodes = []
+  selectedIndustryNodes =[]
   resizeSubscription!: Subscription;
+
+  consultingNodes = [];
+  otherConsultingNodes =[];
+
+  industryNodes = [];
+  otherIndustryNodes =[];
   @ViewChild('carousel', { static: true }) carousel!: NgbCarousel;
 
   currentSlide: number = 0;
@@ -105,15 +111,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private _register: PreRegsiterService,
     private scrollAnims: ScrollAnimsService,
     private _industry:IsicCodesService,
-    private _consultingTree:ConsultingTreeService
+
   ) {
     this.isLoading$ = this.authService.isLoading$;
     this.isLoadingCountires$ = this._countriesGet.isLoading$;
-    this.isLoadingIsicCodes$ = this._industry.isLoading$;
     this.isLoadingConsultingFields$ = this._consultingFieldsService.isLoading$;
     this.isLoadingHSCodes$ = this._hsCodeService.isLoading$;
     this.isLoadingSubmit$ = this._register.isLoading$;
-    this.isLoadingTreeCons$ =this._consultingTree.isLoading$
+
   }
 
   ngAfterViewInit(): void {
@@ -126,18 +131,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     //  window.addEventListener('resize', this.updateDialogWidth.bind(this));
     this.translate.onLanguageChange().subscribe((lang) => {
       this.lang = lang;
-      this.selectedNodes= null;
-      this.loadISIC();
-      this.setOptionLabel();
-      this.setOptionLabelField()
     });
     this.getListOfCountries();
-    this.setOptionLabel();
-    this.getTreeConsulting()
     this.initForm();
-    this.getConsultingFields();
-    this.onConsultingFieldChange();
-    this.loadISIC();
     this.windowResize()
   }
   windowResize(){
@@ -151,98 +147,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       console.log(this.dialogWidth);
     })
   }
-  loadISIC() {
-    this.reverseLoader=true;
-    const isicSub = this._industry.getIsicCodesTree().subscribe({
-      next: (res:any) => {
-        this.nodes = res;
-      },
-      error: (err:any) => {
-        console.error('Error fetching ISIC codes:', err);
-      },
-    });
-    this.unsubscribe.push(isicSub);
-  }
 
-  getTreeConsulting(){
-    const treeSub = this._consultingTree.getIsicCodesTree(this.lang ? this.lang : 'en')
-    .subscribe(
-      {
-        next:(res)=>{
-          this.consultingNodes=res;
-        },
-        error:(error)=>{}
-      }
-    );
-    this.unsubscribe.push(treeSub)
-  }
-  buildTreeNodes(data: any[]): TreeNode[] {
-    return data.map((item) => this.transformToTreeNode(item));
-  }
 
-  transformToTreeNode(item: any): TreeNode {
-    let label = item.name ? (this.lang === 'en' ? item.name.en : item.name.ar) : '';
-    let node: TreeNode = {
-      label: `${item.code} ${label}`,
-      data: item,
-      key: item.code,
-      children: item.child_isic_code ? item.child_isic_code.map((child: any) => this.transformToTreeNode(child)) : [],
-    };
-    return node;
-  }
-
-  showISICDialog() {
-    this.isISICDialogVisible = true;
-  }
-
-  getSelectedItemsLabel(selectedNodes: TreeNode[]): string {
-    if (!selectedNodes || selectedNodes.length === 0) {
-      return 'No items selected';
-    }
-    return `${selectedNodes.length} items selected`;
-  }
-  
-  onISICDialogOK() {
-    this.isISICDialogVisible = false;
-    // Update the form control 'isicCodes' with selected nodes
-    const selectedIsicCodes = this.selectedNodes.map((node: any) => node);
-    this.registrationForm.get('isicCodes')?.setValue(selectedIsicCodes);
-    this.registrationForm.get('isicCodes')?.markAsTouched();
-    console.log("this.selectedNodoes on Dialog", this.selectedNodes);
-  }
-  
-  onISICDialogCancel() {
-    this.isISICDialogVisible = false;
-  }
-  selectedNodesLabel(): string {
-    if (this.selectedNodes && this.selectedNodes.length > 0) {
-      return this.selectedNodes.map((node: any) => node.label).join(', ');
-    } else {
-      return '';
-    }
-  }  
-
-  getConsultingFields() {
-    const getConsultingFieldsSub = this._consultingFieldsService.getConsultingFields().subscribe({
-      next: (res) => {
-        this.consultingFields = res;
-      },
-      error: (err) => {
-        console.log('err', err);
-      },
-    });
-    this.unsubscribe.push(getConsultingFieldsSub);
-  }
-
-  setOptionLabelField() {
-    if (this.lang === 'en') {
-      this.optionLabelField = 'description.en';
-      this.optionLabelHSCode = 'label';
-    } else if (this.lang === 'ar') {
-      this.optionLabelField = 'description.ar';
-      this.optionLabelHSCode = 'label';
-    }
-  }
 
   getListOfCountries() {
     const getCountriesSub = this._countriesGet.getCountries(this.lang ? this.lang : 'en').subscribe({
@@ -270,14 +176,38 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   onImageError(country: any): void {
     country.flagPath = `../../../../../assets/media/flags/default.svg`; // Set a default image path
   }
-  setOptionLabel() {
-    if (this.lang === 'en') {
-      this.optionLabel = 'name.en';
-    } else if (this.lang === 'ar') {
-      this.optionLabel = 'name.ar';
-    }
-  }
 
+  getEmittedConsultingFields(event: any) {
+    this.selectedConsultingFieldNodes = event;
+    console.log("selectedConsultingFieldNodes", this.selectedConsultingFieldNodes);
+
+    // Split results into two arrays
+    const numberKeys = this.selectedConsultingFieldNodes.filter((node: any) => typeof node.key === 'number');
+    const stringKeys = this.selectedConsultingFieldNodes.filter((node: any) => 
+        typeof node.key === 'string' && node.key !== 'selectAll' && node.data.customInput !== undefined  && node.data.customInput !== null
+    );
+
+    console.log("Nodes with number keys:", numberKeys);
+    console.log("Nodes with string keys (excluding 'selectAll'):", stringKeys);
+    this.consultingNodes = numberKeys;
+    this.otherIndustryNodes = stringKeys;
+   
+}
+  getEmittedIndustries(event:any){
+    this.selectedIndustryNodes = event
+    console.log("selectedIndustryNodes",this.selectedIndustryNodes);
+
+     // Split results into two arrays
+     const numberKeys = this.selectedIndustryNodes.filter((node: any) => typeof node.key === 'number');
+     const stringKeys = this.selectedIndustryNodes.filter((node: any) => 
+         typeof node.key === 'string' && node.key !== 'selectAll' && node.data.customInput !== undefined  && node.data.customInput !== null
+     );
+ 
+     console.log("Nodes with number keys:", numberKeys);
+     console.log("Nodes with string keys (excluding 'selectAll'):", stringKeys);
+     this.industryNodes = numberKeys;
+     this.otherIndustryNodes = stringKeys;
+  }
   initForm() {
     this.registrationForm = this.fb.group(
       {
@@ -295,72 +225,72 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           ],
         ],
         agree: [true],
-        isicCodes:[[],Validators.required]
       },
       {
         validator: ConfirmPasswordValidator.MatchPassword,
       }
     );
   }
-
-  onConsultingFieldChange() {
-    const consultingFieldSub = this.registrationForm
-      .get('consultingField')
-      ?.valueChanges.subscribe((res) => {
-        const selectedFields = res;
-        if (selectedFields && selectedFields.length > 0) {
-          this.isOtherSelected = selectedFields.some((field: any) => field.description.en.trim() === 'Other');
-        } else {
-          this.isOtherSelected = false;
-        }
-
-        if (this.isOtherSelected) {
-          this.registrationForm
-            .get('otherConsultingField')
-            ?.setValidators([Validators.required, Validators.maxLength(100)]);
-        } else {
-          this.registrationForm.get('otherConsultingField')?.clearValidators();
-          this.registrationForm.get('otherConsultingField')?.setValue('');
-        }
-        this.registrationForm.get('otherConsultingField')?.updateValueAndValidity();
-      });
-    if (consultingFieldSub) this.unsubscribe.push(consultingFieldSub);
+  
+prepareFormData(){
+  const formData = new FormData();
+  formData.append('first_name', this.registrationForm.get('firstName')?.value);
+  formData.append('last_name', this.registrationForm.get('lastName')?.value);
+  formData.append('email', this.registrationForm.get('email')?.value);
+  formData.append('password', this.registrationForm.get('password')?.value);
+  formData.append('confirm_password', this.registrationForm.get('password')?.value);
+  formData.append('country_id', this.selectedCountry.id);
+  formData.append('about', this.registrationForm.get('aboutDescription')?.value);
+  console.log("consultingFields",this.consultingFields);
+  if(this.consultingNodes.length>0){
+    this.consultingNodes.forEach((field: any) => {
+    formData.append("consulting_feild_ids[]", field.key.toString());
+  });
+  }
+  console.log("industryNodes",this.industryNodes);
+  if(this.industryNodes.length>0){
+    this.industryNodes.forEach((industry: any) => {
+    formData.append("industry_ids[]", industry.key.toString());
+  });
   }
 
+  if(this.otherConsultingNodes && this.otherConsultingNodes.length>0){
+    this.otherConsultingNodes.forEach((field:any, index) => {
+      formData.append(`suggest_consulting_fields[${index}][parent_id]`, field.parent.key ==="selectAll" ? 0 :field.parent.key);
+      formData.append(`suggest_consulting_fields[${index}][name][en]`, field.data.customInput);
+      formData.append(`suggest_consulting_fields[${index}][name][ar]`, field.data.customInput);
+    });
+  }
+  
+  if(this.otherIndustryNodes && this.otherIndustryNodes.length>0){
+    this.otherIndustryNodes.forEach((field:any, index) => {
+      formData.append(`suggest_industries[${index}][parent_id]`, field.parent.key ==="selectAll" ? 0 :field.parent.key);
+      formData.append(`suggest_industries[${index}][name][en]`, field.data.customInput);
+      formData.append(`suggest_industries[${index}][name][ar]`, field.data.customInput);
+    });
+  }
+
+  const formDataEntries: Array<{ key: string; value: string }> = [];
+  formData.forEach((value, key) => {
+    formDataEntries.push({ key, value: value.toString() });
+  });
+  console.table(formDataEntries);
+  return formData;
+}
+
+
   submit() {
-    if (this.registrationForm.valid && this.selectedNodes.length > 0 && this.selectedCountry
-      && this.selectedNodesCons.length>0
+    if (this.registrationForm.valid  && this.selectedCountry
     ) {
       this.hasError = false;
-      const newUser: UserPreRegistration = {
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        confirm_password: '',
-        country_id: 1,
-        industry_ids: [],
-        consulting_feild_ids: [],
-        hs_code: '',
-        description: '',
-      };
-      newUser.first_name = this.registrationForm.get('firstName')?.value;
-      newUser.last_name = this.registrationForm.get('lastName')?.value;
-      newUser.email = this.registrationForm.get('email')?.value;
-      newUser.password = this.registrationForm.get('password')?.value;
-      newUser.confirm_password = this.registrationForm.get('password')?.value;
-      newUser.country_id = this.selectedCountry.id;
-      console.log('this.selectedNodes',this.selectedNodes);
-      newUser.industry_ids = this.selectedNodes.map((node:any) => node.data.key);
-      newUser.consulting_feild_ids = this.selectedNodesCons.map((field: any) => field.key);
-      newUser.description = this.registrationForm.get('aboutDescription')?.value || null;
-      newUser.other_consulting_field = this.registrationForm.get('otherConsultingField')?.value || null;
-      console.log("newUser",newUser);
-      const registerAPI = this._register.preRegisterUser(newUser).pipe(first()).subscribe({
+      const emailControl = this.registrationForm.get('email');
+const email = emailControl?.value;
+      const user= this.prepareFormData();
+      const registerAPI = this._register.preRegisterUser(user).pipe(first()).subscribe({
         next: (res) => {
           if (res.state) {
             this.registrationForm.reset();
-            this.router.navigate(['/auth/verify-email', newUser.email]);
+            this.router.navigate(['/auth/verify-email', email]);
           }
         },
         error: (error) => {

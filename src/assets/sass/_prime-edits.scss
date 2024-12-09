@@ -320,3 +320,6 @@ html[dir='ltr'] .industry-tree  .p-tree-toggler-icon{
            .country-list .p-dropdown-trigger{
             padding-inline-start:25px !important ;
             }
+            .industry-tree .p-checkbox-disabled{
+                display: none !important;
+            }

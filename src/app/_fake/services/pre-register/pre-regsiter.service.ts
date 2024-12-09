@@ -43,10 +43,12 @@ export class PreRegsiterService {
     }));
   }
 
-  preRegisterUser(user: UserPreRegistration, lang: string = 'en'): Observable<any> {
+
+ 
+
+  preRegisterUser(user: FormData, lang: string = 'en'): Observable<any> {
     const headers = new HttpHeaders({
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
       'lang': lang
     });
 

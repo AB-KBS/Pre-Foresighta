@@ -28,16 +28,21 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { CallbackComponent } from './components/callback/callback.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ButtonModule } from 'primeng/button';
+import { ConsultingFieldTreeComponent } from './components/registration/consulting-field-tree/consulting-field-tree.component';
+import { IndustryTreeComponent } from './components/registration/industry-tree/industry-tree.component';
 @NgModule({
   declarations: [
     LoginComponent,
     RegistrationComponent,
     VerficationCardComponent,
     PasswordResetComponent,
+    ConsultingFieldTreeComponent,
     LogoutComponent,
     CallbackComponent,
     SignUpComponent,
     VerifyEmailComponent,
+    IndustryTreeComponent,
     WaitComponent,
     AuthComponent,
   ],
@@ -57,6 +62,7 @@ import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PasswordModule,
     ToastModule,
     LanguageSwitchModule,
+    ButtonModule,
     FormsModule,
     ReactiveFormsModule,
     MultiSelectModule,
