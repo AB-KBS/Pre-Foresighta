@@ -11,10 +11,10 @@
     <div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
       <!--begin::Aside-->
       <div
-        class="d-flex flex-center flex-lg-start flex-column justify-content-between w-100 pt-15"
+        class="d-flex flex-center flex-lg-start flex-column justify-content-between w-100 pt-5"
       >
         <!--begin::Logo-->
-        <div class="d-flex flex-column pb-20 max-w-630px">
+        <div class="d-flex flex-column pb-5 max-w-630px">
           <a class="mb-7 logo-foresighta">
             <img
               *ngIf="lang === 'en'"
@@ -51,7 +51,7 @@
             <ng-template ngbSlide *ngFor="let slide of slides; let i = index">
               <div
                 class="d-flex flex-column justify-content-start glass mb-4 m-auto w-100"
-                style="min-height: 170px"
+                style="min-height: 400px"
               >
                 <h5 class="h4 font-weight-bold text-white fs-2 fw-bold py-2" [innerHTML]=" slide.title | translate">
                 </h5>
